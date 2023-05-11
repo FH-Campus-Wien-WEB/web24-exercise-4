@@ -126,7 +126,7 @@ In a next step, convert the data that the API returns to the format that we use 
 * the `MetaScore` to either `null` if not available or to a number representing the Metascore, and finally,
 * the `imdbRating` to a number.
 
-At the bare minimum, send back a status code of 200 to inform the client that the operation was successful.
+As a bare minimum, send back a status code of 200 to inform the client that the operation was successful. You can also include the movies added as payload to inform the client.
 
 ### Task 3: Add a DELETE endpoint on the server-side and send the corresponding request from the client when the *Delete*-button of a movie is clicked
 
