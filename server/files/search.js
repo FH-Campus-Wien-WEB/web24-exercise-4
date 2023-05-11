@@ -1,8 +1,6 @@
-import { ResultFormBuilder, NoResultsBuilder } from "./builders.js";
-
 function search() {
   /* Task 1.2: Initialize the searchForm correctly */
-  const searchForm = ...
+  const searchForm = undefined; 
 
   if (searchForm.reportValidity()) {
     const xhr = new XMLHttpRequest();
