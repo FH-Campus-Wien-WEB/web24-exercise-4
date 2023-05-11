@@ -89,7 +89,7 @@ The new endpoint internally queries `omdbapi.com`. You will have to register and
 
 The `GET /search` endpoint finally returns an array with the results obtained from `omdbapi.com`, but the results sent back to the client only include the properties `Title`, `imdbID`, and `Year`. Make sure to convert the the `Year` property to a number before passing it on.
 
-**1.2 In `search.js`.** In this subtask, you make sure that endpoint you added in 1.1. is used by the search form. Almost all the functionality is already there. But you need to correctly initialize the `searchForm` variable with the `form` HTML element that contains the search input element. Then, complete the configuration of the XMLHttpRequest `xhr` to target the `/search` endpoint passing the **query** entered by the user to the endpoint using a *query parameter* named *query*.
+**1.2. In `search.js`.** In this subtask, you make sure that endpoint you added in 1.1. is used by the search form. Almost all the functionality is already there. But you need to correctly initialize the `searchForm` variable with the `form` HTML element that contains the search input element. Then, complete the configuration of the XMLHttpRequest `xhr` to target the `/search` endpoint passing the **query** entered by the user to the endpoint using a *query parameter* named *query*.
 
 **1.3. In `search.js`.** Again, in `search.js`, once the results are returned from the server (see 1.1), we add then to the DOM.
 
@@ -116,7 +116,7 @@ Two cases need to be considered:
 
 **2.1. In `search.js`**. To finish our search feature, add a click event handler to our `Add selected to collection` button. On button click, collect all selected `imdbID`s in an array and POST them to the `/movies` endpoint.
 
-**2.2. In `server.js`.**. On the server-side, add the `POST /movies` endpoint add query `omdbapi.com` again to obtain the data for the selected movies. 
+**2.2. In `server.js`.** On the server-side, add the `POST /movies` endpoint and query `omdbapi.com` again to obtain the data for the selected movies. 
 
 In a next step, convert the data that the API returns to the format that we use in our movie collection. This automates what you did manually in the first task of exercise 1. You will have to through away some of the property and also convert some of them, namely:
 * the `Released` to an ISO date string,
@@ -125,6 +125,8 @@ In a next step, convert the data that the API returns to the format that we use 
 * the `Actors` property to an array of strings,
 * the `MetaScore` to either `null` if not available or to a number representing the Metascore, and finally,
 * the `imdbRating` to a number.
+
+At the bare minimum, send back a status code of 200 to inform the client that the operation was successful.
 
 ### Task 3: Add a DELETE endpoint on the server-side and send the corresponding request from the client when the *Delete*-button of a movie is clicked
 
