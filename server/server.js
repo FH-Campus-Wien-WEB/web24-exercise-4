@@ -3,7 +3,6 @@ const path = require("path");
 const http = require("http");
 const bodyParser = require("body-parser");
 const movieModel = require("./movie-model.js");
-const { API_KEYS, URLS } = require("./constants");
 
 const app = express();
 
