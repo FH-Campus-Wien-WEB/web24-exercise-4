@@ -62,12 +62,12 @@ To start the tests, run
 
 Again, there are subtasks for the three tasks. Here is the scheme we will use to award the points:
 
-+ 1.1. `GET /search` returns the correct data from `omdbapi.com`: **0.5 points**
-+ 1.2. User query is sent to the `GET /search` endpoint: **0.25 points**
-+ 1.3. Search results are rendered correctly: **0.25 points**
++ 1.1. `GET /search` returns the correct data from `omdbapi.com`: **0.4 points**
++ 1.2. User query is sent to the `GET /search` endpoint: **0.2 points**
++ 1.3. Search results are rendered correctly: **0.4 points**
 
-+ 2.1. Send ids of the selected movies to endpoint `POST /movies` : **0.5 points**
-+ 2.2. Added movies are available in the `GET /movies` endpoint: **0.5 points**
++ 2.1. Send ids of the selected movies to endpoint `POST /movies` : **0.25 points**
++ 2.2. Added movies are available in the `GET /movies` endpoint: **0.75 points**
 
 + 3.1. A click on the 'Delete' button calls the `DELETE /movies/:imdbID` endpoint: **0.33 points**
 + 3.2. Removal of a movie using `DELETE /movies/:imdbID` successfully deletes the movie from the server-side movie collection: **0.33 points**
