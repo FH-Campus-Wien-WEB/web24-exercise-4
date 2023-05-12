@@ -1,6 +1,6 @@
 # Web Technologies - Exercise 4
 
-The fourth and last assignment is about movie management. We are going to include functionality to search for movies using the `https://www.omdbapi.com/`, select some of the movies found and add them to our personal movie collection. We also will be adding a new button to each movie to remove it from our collection. 
+The fourth and last assignment is about movie management. We are going to include functionality to search for movies using the `https://www.omdbapi.com/`, select some of the movies found and add them to our personal movie collection. We also will be adding a new button to each movie `article` element to be able to remove it from our collection. 
 
 As usual, you find detailed information about each part in the **Tasks** section below.
 
@@ -28,33 +28,33 @@ in your terminal. Navigate to [http://localhost:3000/](http://localhost:3000/) t
 
 Our starting point for exercise 4 is a solution of exercise 3. 
 
-On the server-side, we still have our `movie-model.js`, this time it does not contain any movies. In `server.js` you will find the server startup code defining the endpoint we have so far
-* `GET /movies` to get either all or genre-specific movides, and `GET /movies/:imdbID` to get a specific movie
-* `GET /movies/:imdbID` to get a specific movie to be edited in our form
-* `PUT /movies/:imdbID` to update a movie and
-* `GET /genres` to get all genres of the collection sorted alphabetically.
+On the server-side, we still have our `movie-model.js`, this time it does not contain any movies. In `server.js` you will find the server startup code defining the endpoints we have so far:
+* `GET /movies` to get either all or genre-specific movies using the query parameter `genre`,
+* `GET /movies/:imdbID` to get a specific movie to be edited in our form,
+* `PUT /movies/:imdbID` to update a movie and, and finally,
+* `GET /genres` to get all genres of the movies in the collection sorted alphabetically.
 
 On the client-side, we now have **three** HTML documents, each of which comes with its own `.css` and `.js` file:
 * `index.html`. The overview page with genre filter and a new navigation area that leads us to `search.html`
 * `edit.html`. Containing the edit functionality, nothing new there.
 * `search.html`. This is where we are going to include the search for movies which we want to add to our personal collection..
 
-Two of the CSS files, `index.css` and `search.css` are based on `grid-base.css`, because both of them use the same basic layout, our grid. The third one, `edit.css` is based on `base.css`, which contains basics styles that are also used in `grid-base.css`.
+Two of the CSS files, `index.css` and `search.css` are based on `grid-base.css`, because both of them use the same basic layout, a CSS grid. The third one, `edit.css` is based on `base.css`, which contains basics styles that are also used in `grid-base.css`.
 
-In `builders.js` all element builders reside, which are used in `index.js` and `search.js`. If you want to read more about the builder pattern, you can start with its [wikipedia page](https://en.wikipedia.org/wiki/Builder_pattern). 
+In `builders.js` all element builders reside, which are used in `index.js` and `search.js`. You can use the builders to build the elements of this exercise, if you wish to do so. If you want to read more about the builder pattern itself, you can start with its [wikipedia page](https://en.wikipedia.org/wiki/Builder_pattern). 
 
 ## Tasks
 
 Here's a first overview of the three tasks, details follow below:
 
-1. Add the **search** capability. In a first step, we will add a new server-side endpoint, `GET /search`, which in turn will use the `omdbapi.com` to search movies and return it to our client. We send the movies found on `omdbapi.com` back to the client (although we only include a limited set of properties) and add the search results to the DOM dynamically. Then, we provide the user with the possibility to select those movies.
+1. **Add the search capability**. In a first step, we will add a new server-side endpoint, `GET /search`, which in turn will use the `omdbapi.com` to search movies and return it to our client. We send the movies found on `omdbapi.com` back to the client (although we only include a limited set of properties) and add the search results to the DOM dynamically. Then, we provide the user with the possibility to select those movies.
 
-2. **Include** movies selected by the user in the server-side collection. In this task, we add functionality to send the movies selected by the user to another new endpoint, namely `POST /movies`, which will query `omdbapi.com` again to get the movie data for the selected movies. Then, we permanentely add the chosen movies to our model.
+2. **Include movies selected by the user in the server-side collection**. In this task, we add functionality to send the movies selected by the user to another new endpoint, namely `POST /movies`, which will query `omdbapi.com` again to get the movie data for the selected movies. Then, we permanentely add the chosen movies to our model.
 
-3. The third task is about **deletion**. We add a functionality for the removal of individual movies to our server and remove the corresponding article element from the DOM once the deletion on the server-side was successful. 
+3. **Remove individual movies from the collection**. We add functionality for the deletion of individual movies on the server-side and also remove the corresponding article element from the DOM once the deletion was successful. 
 
 ### Checking your implementation
-As usual, to check whether your implementation is working as expected you **run** Cypress end-to-end tests. These tests are the exact same tests used to assess your implementation once you commit it to the GitHub repository, only this time there are ? of them.
+As usual, to check whether your implementation is working as expected you **run** Cypress end-to-end tests. These tests are the exact same tests used to assess your implementation once you commit it to the GitHub repository, this time there are 8 of them.
 
 To start the tests, run
 
@@ -69,8 +69,8 @@ Again, there are subtasks for the three tasks. Here is the scheme we will use to
 + 2.1. Send ids of the selected movies to endpoint `POST /movies` : **0.5 points**
 + 2.2. Added movies are available in the `GET /movies` endpoint: **0.5 points**
 
-+ 3.1. A click on the 'Delete' button calls the DELETE /movies/:imdbID endpoint: **0.33 points**
-+ 3.2. Removal of a movie using DELETE /movies/:imdbID successfully deletes the movie from the server-side movie collection: **0.33 points**
++ 3.1. A click on the 'Delete' button calls the `DELETE /movies/:imdbID` endpoint: **0.33 points**
++ 3.2. Removal of a movie using `DELETE /movies/:imdbID` successfully deletes the movie from the server-side movie collection: **0.33 points**
 + 3.3. After successfully deleting a movie on the server-side, the movie is removed from the DOM: **0.34 points**
 
 As always, use the configured test specification file `cypress/e2e/assessment.cy.js` to run the tests.
@@ -79,25 +79,25 @@ As always, use the configured test specification file `cypress/e2e/assessment.cy
 
 **1.1 In `server.js`.** Add and implement the `GET /search` endpoint.
 
-Add the new endpoint and include a sanity-check of the incoming request. If the request does not include a `query` parameter, reply with a status code **400** (Bad request).
+Add the new endpoint and include a sanity-check of the incoming request. If the request does not include a `query` parameter, reply with a status code **400 (Bad request)**.
 
-If the request passes this sanity-check, continue with the endpoint logic.
+If the request passes the sanity-check, continue with the endpoint logic.
 
-The new endpoint internally queries `omdbapi.com`. You will have to register and obtain an API key. Using that key, you can then query the API as described on their [main page](https://www.omdbapi.com/). Use either the build in [`http` module](https://nodejs.org/api/http.html) or another HTTP client to your liking.
+The endpoint internally queries `omdbapi.com`. You will have to register on `omdbapi.com`and obtain an API key. Using that key, you can then query the API as described on their [main page](https://www.omdbapi.com/). Use either the [`http` module](https://nodejs.org/api/http.html) available in Node.js or another HTTP client to your liking.
 
-**Use the `s` parameter of the API to search for movie titles.**
+**Use the `s` parameter of the OMDb API to search for movie titles.**
 
-The `GET /search` endpoint finally returns an array with the results obtained from `omdbapi.com`, but the results sent back to the client only include the properties `Title`, `imdbID`, and `Year`. Make sure to convert the the `Year` property to a number before passing it on.
+The `GET /search` endpoint finally returns an **array** with the results obtained from `omdbapi.com`, but the results sent back to the client only include the properties `Title`, `imdbID`, and `Year`. Make sure to convert the the `Year` property to a number before passing it on.
 
-**1.2. In `search.js`.** In this subtask, you make sure that endpoint you added in 1.1. is used by the search form. Almost all the functionality is already there. But you need to correctly initialize the `searchForm` variable with the `form` HTML element that contains the search input element. Then, complete the configuration of the XMLHttpRequest `xhr` to target the `/search` endpoint passing the **query** entered by the user to the endpoint using a *query parameter* named *query*.
+**1.2. In `search.js`.** In this subtask, you make sure that endpoint you added in 1.1. is used by the search form. Almost all the functionality is already there. But you need to correctly initialize the `searchForm` variable with the `form` HTML element that contains the search input element. Then, complete the configuration of the XMLHttpRequest `xhr` to target the `GET /search` endpoint passing the **query** entered by the user to the endpoint using a *query parameter* named *query* (that's a lot of queries 😄).
 
-**1.3. In `search.js`.** Again, in `search.js`, once the results are returned from the server (see 1.1), we add then to the DOM.
+**1.3. In `search.js`.** Again, in `search.js`, once the results are returned from the server (see 1.1), we add them to the DOM.
 
 You will find a `sectionElement` already initialized in `search.js`. Your task is to dynamically add content to this element.
 
 Two cases need to be considered:
 
-1. No movies for the user query is found. In this case add a `p` paragraph element with a corresponding message. E.g. for the query **'asdf'**:
+1. No movies for the user query are found. In this case add a `p` paragraph element with a corresponding message. E.g. for the query **'asdf'**:
     ```html
     <p>No results for your query 'asdf' found.</p>
     ```
@@ -114,14 +114,14 @@ Two cases need to be considered:
 
 ### Task 2: Send the selected movies to the server and add them to the movie collection permanently.
 
-**2.1. In `search.js`**. To finish our search feature, add a click event handler to our `Add selected to collection` button. On button click, collect all selected `imdbID`s in an array and POST them to the `/movies` endpoint.
+**2.1. In `search.js`**. To finish our search feature, add a click event handler to our `Add selected to collection` button. On button click, collect all selected checkboxes of the form and add their `imdbID`s in an array. Then, POST this array to the `POST /movies` endpoint.
 
 **2.2. In `server.js`.** On the server-side, add the `POST /movies` endpoint and query `omdbapi.com` again to obtain the data for the selected movies. 
 
-In a next step, convert the data that the API returns to the format that we use in our movie collection. This automates what you did manually in the first task of exercise 1. You will have to through away some of the property and also convert some of them, namely:
+In a next step, convert the data that the API returns to the format that we use in our movie collection. This automates what you did manually in the first task of exercise 1. You will have to through away some of the properties and also convert some of them, namely:
 * the `Released` to an ISO date string,
 * the `Runtime` to either `null` if not available or to a number representing the runtime of the movie in minutes,
-* the `Genre`, `Director`, and `Writer` properties to arrays of strings. In addition to that, their name changes to the pluralized form, e.g., `Genre` becomes `Genres`,
+* the `Genre`, `Director`, and `Writer` properties to arrays of strings. In addition to that, their names change to the pluralized form, e.g., `Genre` becomes `Genres`,
 * the `Actors` property to an array of strings,
 * the `MetaScore` to either `null` if not available or to a number representing the Metascore, and finally,
 * the `imdbRating` to a number.
@@ -132,8 +132,8 @@ As a bare minimum, send back a status code of 200 to inform the client that the 
 
 **3.1. In index.js.** When the user clicks the *Delete*-button, the `deleteMovie(imdbID)` function in `index.js` is called. Add an `XMLHttpRequest` to it, configure it to target the `DELETE /movies/:imdbID` endpoint and send it.
 
-**3.2. In server.js.** On the server-side, add the `DELETE /movies/:imdbID` endpoint and remove the movie with the given path parameter from the movie collection. Confirm the successful deletion by sending back a status code of 200.
+**3.2. In server.js.** On the server-side, add the `DELETE /movies/:imdbID` endpoint and remove the movie with the `imdbID` given as a path parameter from the movie collection. Confirm the successful deletion by sending back a status code of **200**.
 
-**3.3. In index.js.** When the server response arrives and carries a 200 status code, remove the `article` element corresponding to the deleted movie (you can find it easily, it has an `id` that is equal to the `imdbID`) from the DOM.
+**3.3. In index.js.** When the server response arrives and carries a **200** status code, remove the `article` element corresponding to the deleted movie (you can find it easily, it has an `id` that is equal to the `imdbID`) from the DOM.
 
 **Well done, good job!** Don't forget to push and check on GitHub!
