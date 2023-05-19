@@ -87,7 +87,7 @@ The endpoint internally queries `omdbapi.com`. You will have to register on `omd
 
 **Use the `s` parameter of the OMDb API to search for movie titles.**
 
-The `GET /search` endpoint finally returns an **array** with the results obtained from `omdbapi.com`, but the results sent back to the client only include the properties `Title`, `imdbID`, and `Year`. Make sure to convert the the `Year` property to a number before passing it on.
+The `GET /search` endpoint finally returns an **array** with the results obtained from `omdbapi.com`, but the results sent back to the client only include the properties `Title`, `imdbID`, and `Year`. Make sure to convert the `Year` property to a number before passing it on. If the `Year` property is not numerical, e.g. when converting a series that spans multiple years (`2010-2016`), then this property will be `null`.
 
 **1.2. In `search.js`.** In this subtask, you make sure that endpoint you added in 1.1. is used by the search form. Almost all the functionality is already there. But you need to correctly initialize the `searchForm` variable with the `form` HTML element that contains the search input element. Then, complete the configuration of the XMLHttpRequest `xhr` to target the `GET /search` endpoint passing the **query** entered by the user to the endpoint using a *query parameter* named *query* (that's a lot of queries 😄).
 
