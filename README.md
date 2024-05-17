@@ -1,10 +1,10 @@
 # Web Technologies - Exercise 4
 
-The fourth and last assignment is about movie management. We are going to include functionality to search for movies using the `https://www.omdbapi.com/`, select some of the movies found and add them to our personal movie collection. We also will be adding a new button to each movie `article` element to be able to remove it from our collection. 
+The fourth and last assignment is about movie management. We are going to include functionality to search for movies using the `https://www.omdbapi.com/`, select some of the movies found and add them to our personal movie collection. We  will also be adding a new button to each movie `article` element to be able to remove it from our collection. 
 
 As usual, you find detailed information about each part in the **Tasks** section below.
 
-To set up your working environment for the project, you will have to perform the same steps you already use since exercise 1. First, you **clone** the project and configure it in an IDE, then you **install** the project's dependencies. To do so, run 
+To set up your working environment for the project, you will have to perform the same steps you have already used since exercise 1. First, you **clone** the project and configure it in an IDE, then you **install** the project's dependencies. To do so, run 
 
     npm install
 
@@ -18,11 +18,11 @@ or using `nodemon` (the **recommended** option)
 
     npm run start-nodemon
 
-to start the server. In any case the server will be running on port 3000. You should see the message
+to start the server. In any case, the server will be running on port 3000. You should see the message
 
     Server now listening on http://localhost:3000/
 
-in your terminal. Navigate to [http://localhost:3000/](http://localhost:3000/) to test the application manually.
+in your terminal. Then navigate to [http://localhost:3000/](http://localhost:3000/) to test the application manually.
 
 ## Project structure
 
@@ -37,11 +37,11 @@ On the server-side, we still have our `movie-model.js`, this time it does not co
 On the client-side, we now have **three** HTML documents, each of which comes with its own `.css` and `.js` file:
 * `index.html`. The overview page with genre filter and a new navigation area that leads us to `search.html`
 * `edit.html`. Containing the edit functionality, nothing new there.
-* `search.html`. This is where we are going to include the search for movies which we want to add to our personal collection..
+* `search.html`. This is where we are going to include the search for movies which we want to add to our personal collection.
 
-Two of the CSS files, `index.css` and `search.css` are based on `grid-base.css`, because both of them use the same basic layout, a CSS grid. The third one, `edit.css` is based on `base.css`, which contains basics styles that are also used in `grid-base.css`.
+Two of the CSS files, `index.css` and `search.css` are based on `grid-base.css`, because both of them use the same  layout, a CSS grid. The third one, `edit.css` is based on `base.css`, which contains basic styles that are also used in `grid-base.css`.
 
-In `builders.js` all element builders reside, which are used in `index.js` and `search.js`. You can use the builders to build the elements of this exercise, if you wish to do so. If you want to read more about the builder pattern itself, you can start with its [wikipedia page](https://en.wikipedia.org/wiki/Builder_pattern). 
+In `builders.js` all element builders reside, which are used in `index.js` and `search.js`. You can use the builders to build the elements of this exercise, if you wish to do so. If you want to read more about the builder pattern itself, you can start with its [Wikipedia page](https://en.wikipedia.org/wiki/Builder_pattern). 
 
 ## Tasks
 
@@ -75,7 +75,7 @@ Again, there are subtasks for the three tasks. Here is the scheme we will use to
 
 As always, use the configured test specification file `cypress/e2e/assessment.cy.js` to run the tests.
 
-### Task 1: Query `ombdbapi.com` and display the movies found to the user
+### Task 1: Query `omdbapi.com` and display the movies found to the user
 
 **1.1 In `server.js`.** Add and implement the `GET /search` endpoint.
 
@@ -87,7 +87,7 @@ The endpoint internally queries `omdbapi.com`. You will have to register on `omd
 
 **Use the `s` parameter of the OMDb API to search for movie titles.**
 
-The `GET /search` endpoint finally returns an **array** with the results obtained from `omdbapi.com`, but the results sent back to the client only include the properties `Title`, `imdbID`, and `Year`. Make sure to convert the `Year` property to a number before passing it on. If the `Year` property is not numerical, e.g. when converting a series that spans multiple years (`2010-2016`), then this property will be `null`.
+The `GET /search` endpoint finally returns an **array** with the results obtained from `omdbapi.com`, but the results sent back to the client only include the properties `Title`, `imdbID`, and `Year`. Ensure the Year property is converted to a number before passing it on. If the `Year` property is not numerical, e.g. when converting a series that spans multiple years (`2010-2016`), then this property will be `null`.
 
 **1.2. In `search.js`.** In this subtask, you make sure that endpoint you added in 1.1. is used by the search form. Almost all the functionality is already there. But you need to correctly initialize the `searchForm` variable with the `form` HTML element that contains the search input element. Then, complete the configuration of the XMLHttpRequest `xhr` to target the `GET /search` endpoint passing the **query** entered by the user to the endpoint using a *query parameter* named *query* (that's a lot of queries 😄).
 
@@ -114,11 +114,11 @@ Two cases need to be considered:
 
 ### Task 2: Send the selected movies to the server and add them to the movie collection permanently.
 
-**2.1. In `search.js`**. To finish our search feature, add a click event handler to our `Add selected to collection` button. On button click, collect all selected checkboxes of the form and add their `imdbID`s in an array. Then, POST this array to the `POST /movies` endpoint.
+**2.1. In `search.js`**. To finish our search feature, add a click event handler to our `Add selected to collection` button. On button click, collect all selected checkboxes of the form and add their `imdbID`s in an array. Then POST this array to the `POST /movies` endpoint.
 
 **2.2. In `server.js`.** On the server-side, add the `POST /movies` endpoint and query `omdbapi.com` again to obtain the data for the selected movies. 
 
-In a next step, convert the data that the API returns to the format that we use in our movie collection. This automates what you did manually in the first task of exercise 1. You will have to through away some of the properties and also convert some of them, namely:
+In a next step, convert the data that the API returns to the format that we use in our movie collection. This automates what you did manually in the first task of exercise 1. You will have to throw away some of the properties and also convert some of them, namely:
 * the `Released` to an ISO date string,
 * the `Runtime` to either `null` if not available or to a number representing the runtime of the movie in minutes,
 * the `Genre`, `Director`, and `Writer` properties to arrays of strings. In addition to that, their names change to the pluralized form, e.g., `Genre` becomes `Genres`,
