@@ -1,28 +1,28 @@
 # Web Technologies - Exercise 4
 
-The fourth and last assignment is about movie management. We are going to include functionality to search for movies using the `https://www.omdbapi.com/`, select some of the movies found and add them to our personal movie collection. We  will also be adding a new button to each movie `article` element to be able to remove it from our collection. 
+The fourth and last assignment is about movie management. We are going to include functionality to search for movies using the `https://www.omdbapi.com/`, select some of the movies found, and add them to our personal movie collection. We  will also be add a new button to each movie `article` element to allow us to remove it from our collection. 
 
-As usual, you find detailed information about each part in the **Tasks** section below.
+As usual, you can find detailed information about each part in the **Tasks** section below.
 
-To set up your working environment for the project, you will have to perform the same steps you have already used since exercise 1. First, you **clone** the project and configure it in an IDE, then you **install** the project's dependencies. To do so, run 
+To set up your working environment for the project, you will need to perform the same steps you have used since exercise 1. First, you **clone** the project and configure it in an IDE, then you **install** the project's dependencies. To do so, run 
 
     npm install
 
 in the project's root directory, where this `README.md` file is located. 
 
-Use 
+Then use
 
     npm start
 
-or using `nodemon` (the **recommended** option)
+or, using `nodemon` (the **recommended** option), run
 
     npm run start-nodemon
 
-to start the server. In any case, the server will be running on port 3000. You should see the message
+to start the server. In any case, the server will run on port 3000. You should see the message
 
     Server now listening on http://localhost:3000/
 
-in your terminal. Then navigate to [http://localhost:3000/](http://localhost:3000/) to test the application manually.
+in your terminal. Navigate to [http://localhost:3000/](http://localhost:3000/) to test the application manually.
 
 ## Project structure
 
@@ -31,36 +31,36 @@ Our starting point for exercise 4 is a solution of exercise 3.
 On the server-side, we still have our `movie-model.js`, this time it does not contain any movies. In `server.js` you will find the server startup code defining the endpoints we have so far:
 * `GET /movies` to get either all or genre-specific movies using the query parameter `genre`,
 * `GET /movies/:imdbID` to get a specific movie to be edited in our form,
-* `PUT /movies/:imdbID` to update a movie and, and finally,
+* `PUT /movies/:imdbID` to update a movie and, finally,
 * `GET /genres` to get all genres of the movies in the collection sorted alphabetically.
 
 On the client-side, we now have **three** HTML documents, each of which comes with its own `.css` and `.js` file:
 * `index.html`. The overview page with genre filter and a new navigation area that leads us to `search.html`
-* `edit.html`. Containing the edit functionality, nothing new there.
-* `search.html`. This is where we are going to include the search for movies which we want to add to our personal collection.
+* `edit.html`. Containing the edit functionality; nothing new there.
+* `search.html`. This is where we will include the search for movies which we want to add to our personal collection.
 
-Two of the CSS files, `index.css` and `search.css` are based on `grid-base.css`, because both of them use the same  layout, a CSS grid. The third one, `edit.css` is based on `base.css`, which contains basic styles that are also used in `grid-base.css`.
+Two of the CSS files, `index.css` and `search.css` are based on `grid-base.css`, because both of them use the same layout, a CSS grid. The third one, `edit.css` is based on `base.css`, which contains basic styles that are also used in `grid-base.css`.
 
-In `builders.js` all element builders reside, which are used in `index.js` and `search.js`. You can use the builders to build the elements of this exercise, if you wish to do so. If you want to read more about the builder pattern itself, you can start with its [Wikipedia page](https://en.wikipedia.org/wiki/Builder_pattern). 
+All element builders reside in `builders.js`, which are used in `index.js` and `search.js`. You can use the builders to build the elements of this exercise, if you wish to do so. If you want to read more about the builder pattern itself, you can start with its [Wikipedia page](https://en.wikipedia.org/wiki/Builder_pattern). 
 
 ## Tasks
 
 Here's a first overview of the three tasks, details follow below:
 
-1. **Add the search capability**. In a first step, we will add a new server-side endpoint, `GET /search`, which in turn will use the `omdbapi.com` to search movies and return it to our client. We send the movies found on `omdbapi.com` back to the client (although we only include a limited set of properties) and add the search results to the DOM dynamically. Then, we provide the user with the possibility to select those movies.
+1. **Add the search capability**. In a first step, we will add a new server-side endpoint, `GET /search`, which in turn will use the `omdbapi.com` to search movies and return it to our client. We will send the movies found on `omdbapi.com` back to the client (including only a limited set of properties) and add the search results to the DOM dynamically. Then, we provide the user with the possibility to select those movies.
 
-2. **Include movies selected by the user in the server-side collection**. In this task, we add functionality to send the movies selected by the user to another new endpoint, namely `POST /movies`, which will query `omdbapi.com` again to get the movie data for the selected movies. Then, we permanentely add the chosen movies to our model.
+2. **Include movies selected by the user in the server-side collection**. In this task, we add functionality to send the movies selected by the user to another new endpoint, namely `POST /movies`, which will query `omdbapi.com` again to get the movie data for the selected movies. Then, we permanently add the chosen movies to our model.
 
 3. **Remove individual movies from the collection**. We add functionality for the deletion of individual movies on the server-side and also remove the corresponding article element from the DOM once the deletion was successful. 
 
 ### Checking your implementation
-As usual, to check whether your implementation is working as expected you **run** Cypress end-to-end tests. These tests are the exact same tests used to assess your implementation once you commit it to the GitHub repository, this time there are 8 of them.
+As usual, to check whether your implementation is working as expected you should **run** Cypress end-to-end tests. These tests are the exact same tests used to assess your implementation once you commit it to the GitHub repository, this time there are 8 of them.
 
 To start the tests, run
 
     npm run cypress
 
-Again, there are subtasks for the three tasks. Here is the scheme we will use to award the points:
+Again, there are subtasks within the three main tasks. Here is the scheme we will use to award the points:
 
 + 1.1. `GET /search` returns the correct data from `omdbapi.com`: **0.4 points**
 + 1.2. User query is sent to the `GET /search` endpoint: **0.2 points**
